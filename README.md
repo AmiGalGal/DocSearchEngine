@@ -1,11 +1,52 @@
-DocSearchEngine
-light weight local documents search engine, Index the documents once and you find them forever
-run completely on the local machine without any API calls or usage of any LLM
+# DocSearchEngine
 
-Convert the documents in your directory into high-dimensional vectors (384 to be exact) and store those vectors
-when you have a query you simply describe in a general sense what in the file you wanted and it compares it to the rest of the files in chunks of 250 words, it produces a sorted list of the fits
-and presents the files ranked by similarity.
+DocSearchEngine is a lightweight local document search engine that lets you search through your files using semantic meaning instead of keywords.
 
-support docx, pdf, txt and md
-finds the K best results
-simple GUI built in tkinter
+It runs completely offline on your machine — no APIs, no LLM calls, and no internet required.
+
+---
+
+## 🔍 How it works
+
+- Documents are split into chunks of 250 words
+- Each chunk is converted into a 384-dimensional vector (embedding)
+- When you search, your query is also converted into a vector
+- The system compares your query against all chunks using cosine similarity
+- Results are ranked by similarity and returned to the user
+
+---
+
+## 📁 Supported file types
+
+- `.txt`
+- `.md`
+- `.pdf`
+- `.docx`
+
+---
+
+## ⚙️ Features
+
+- Fully local search engine
+- Semantic search (not keyword-based)
+- Works on document chunks for better accuracy
+- Returns top-K most relevant results
+- Simple GUI built with Tkinter
+- No external APIs required
+
+---
+
+## 🖥️ Interface
+
+A simple Tkinter GUI allows you to:
+- Search documents instantly
+- View matching file paths
+- See the most relevant text section from each file
+
+---
+
+## 📌 Notes
+
+This project converts all documents in a folder into a vector database, allowing fast similarity search across local files.
+
+---
