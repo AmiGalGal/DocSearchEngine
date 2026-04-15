@@ -45,11 +45,14 @@ class App:
 
     def do_search(self):
         query = self.entry.get()
-        name, text = Retriever.search(query, DB_FILE)
+        files, texts = Retriever.search(query, DB_FILE, top=3)
 
-        self.result.config(
-            text=f"The file found is: {name}\n\n{text}"
-        )
+        result_text = ""
+
+        for i in range(len(files)):
+            result_text += f"{i + 1}. File found: {files[i]}\n\n{texts[i]}\n\n---\n\n"
+
+        self.result.config(text=result_text)
 
     def clear(self):
         for widget in self.root.winfo_children():
