@@ -23,24 +23,31 @@ def load_json(file_path):
 def FindBest(vectors, filenames, chunks, query):
     length = len(filenames)
     queryVec = Embedder.embed(query)
-    bestScore = Embedder.similarity(queryVec, vectors[0])
-    bestIndex = 0
-    for i in range(1, length):
+    scores = []
+    indexes = []
+    for i in range(0, length):
         score = Embedder.similarity(queryVec, vectors[i])
-        if score > bestScore:
-            bestScore = score
-            bestIndex = i
-    return bestIndex
+        scores.append(score)
+        indexes.append(i)
+    sortedIdx = sorted(zip(scores, indexes), reverse=True)
+    scores, indexes = zip(*sortedIdx)
+    return indexes
 
 def extractText(vectors, filenames, chunks, index):
     FullText = Parser.DocToText(filenames[index])
     words = FullText.split()
-    chunk_words = words[250*chunks[index]:250*(chunks[index]+1)]
+    chunk_words = words[chunks[index]:chunks[index]+250]
     chunk_text = " ".join(chunk_words)
     return chunk_text
 
-def search(query, DB= "ktqdmCptcsXM.json"):
+def search(query, DB= "ktqdmCptcsXM.json", top = 3):
     v,f,c = load_json(DB)
     q = query
     bi = FindBest(v,f,c,q)
-    return f[bi], extractText(v,f,c,bi)
+    files = []
+    texts = []
+    for i in range(top):
+        files.append(f[bi[i]])
+        texts.append(extractText(v,f,c,bi[i]))
+
+    return files, texts
