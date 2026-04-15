@@ -1,5 +1,5 @@
-#File purpose: finding the files and storing the chunks in the files.
-#For large document collections, JSON is not an efficient storage format — serializing high-dimensional float vectors as text inflates file size significantly compared to binary formats.
+#File purpose: finding the files and storing the chunks in the files
+
 import os
 import Parser
 import Embedder
