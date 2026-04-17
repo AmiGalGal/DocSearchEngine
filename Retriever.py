@@ -46,6 +46,7 @@ def search(query, DB= "ktqdmCptcsXM.json", top = 3):
     bi = FindBest(v,f,c,q)
     files = []
     texts = []
+    top = min(top, len(bi))
     for i in range(top):
         files.append(f[bi[i]])
         texts.append(extractText(v,f,c,bi[i]))
